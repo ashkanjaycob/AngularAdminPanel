@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html ng-app="app" lang="fa" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angular Admin App</title>
+    
+    <base href="/">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-cookies.min.js"></script>
+
+
     <script src="app/app.module.js"></script>
     <script src="app/controllers/dashboard.controller.js"></script>
     <script src="app/controllers/login.controller.js"></script>
+
+
+
 </head>
-<body>
+<body  ng-app="app">
+    <nav>
+        <a href="/">داشبورد</a>
+        <a href="/login">ورود</a>
+        <a href="/sdfgfdgd">اشتباه</a>
+    </nav>
+    
     <div ng-view></div>
 </body>
 </html>
