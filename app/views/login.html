@@ -6,13 +6,14 @@
       ng-model="credentials.username"
       placeholder="نام کاربری"
       autocomplete="username"
+      required
     />
     <input
       type="password"
       ng-model="credentials.password"
       placeholder="رمز عبور"
       autocomplete="current-password"
-      class="ng-pristine ng-untouched ng-valid ng-empty"
+      required
     />
     <button type="submit">ورود</button>
   </form>

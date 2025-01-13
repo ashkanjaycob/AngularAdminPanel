@@ -1,16 +1,35 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const proxy = require("express-http-proxy");
+const path = require("path");
+const cors = require("cors");
 const app = express();
 
-// سرو فایل‌های استاتیک
+app.use(cors());
 app.use(express.static(__dirname));
 
-// هدایت همه درخواست‌ها به index.html
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
+// Proxy for Shopgram API
+app.use(
+  "/api",
+  proxy("www.shopgram123.ir", {
+    https: true,
+    proxyReqPathResolver: function (req) {
+      console.log("Original URL:", req.url); // Add logging to debug
+      const newPath = "/site/api/v1" + req.url.replace("/api", "");
+      console.log("New Path:", newPath); // Add logging to debug
+      return newPath;
+    },
+    proxyReqOptDecorator: function (proxyReqOpts) {
+      proxyReqOpts.headers["Content-Type"] = "application/json";
+      return proxyReqOpts;
+    },
+  })
+);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// راه‌اندازی سرور روی پورت 5500
-app.listen(5500, () => {
-    console.log('Server is running on http://localhost:5500');
-}); 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

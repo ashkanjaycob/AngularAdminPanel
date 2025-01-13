@@ -19,6 +19,8 @@
   "homepage": "https://github.com/ashkanjaycob/AngularAdminPanel#readme",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2"
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-http-proxy": "^2.1.1"
   }
 }
