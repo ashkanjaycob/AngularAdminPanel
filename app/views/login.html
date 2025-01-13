@@ -1,19 +1,17 @@
 <div ng-controller="LoginController">
   <h1>ورود به سیستم</h1>
-  <form ng-submit="login()">
+  <form ng-submit="validateAndLogin()">
     <input
       type="text"
       ng-model="credentials.username"
-      placeholder="نام کاربری"
-      autocomplete="username"
-      required
+      placeholder="شماره تلفن"
+      maxlength="11"
     />
     <input
       type="password"
       ng-model="credentials.password"
       placeholder="رمز عبور"
-      autocomplete="current-password"
-      required
+      minlength="4"
     />
     <button type="submit">ورود</button>
   </form>
