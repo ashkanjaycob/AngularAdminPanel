@@ -5,11 +5,14 @@
       type="text"
       ng-model="credentials.username"
       placeholder="نام کاربری"
+      autocomplete="username"
     />
     <input
       type="password"
       ng-model="credentials.password"
       placeholder="رمز عبور"
+      autocomplete="current-password"
+      class="ng-pristine ng-untouched ng-valid ng-empty"
     />
     <button type="submit">ورود</button>
   </form>
