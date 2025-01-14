@@ -1,35 +1,61 @@
-app.controller("DashboardController", function ($scope, $location, $cookies) {
-    $scope.welcomeMessage = "به پنل مدیریت خوش آمدید";
-    var logoutModal;
+app.controller("DashboardController", function ($scope, $http, $location, $cookies) {
+  $scope.welcomeMessage = "به پنل مدیریت خوش آمدید";
+  var logoutModal;
 
-    // Initialize Bootstrap components
-    angular.element(document).ready(function () {
-        // Initialize the logout modal
-        logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'));
-        
-        // Handle sidebar close on mobile when clicking nav items
-        var sidebarEl = document.getElementById('sidebar');
-        var sidebar = bootstrap.Offcanvas.getOrCreateInstance(sidebarEl);
-        
-        if (window.innerWidth < 992) {
-            var links = sidebarEl.querySelectorAll('.nav-link:not([ng-click])'); // Exclude logout link
-            links.forEach(function(link) {
-                link.addEventListener('click', function() {
-                    sidebar.hide();
-                });
+    // Fetch user data
+    function fetchUserData() {
+      $http({
+          method: 'GET',
+          url: '/api/user',
+          headers: {
+              'Authorization': 'Bearer ' + $cookies.get('token') ,
+              'Accept': 'application/json', 
+              'Content-Type': 'application/json' 
+          }
+      }).then(function(response) {
+          console.log('API Response:', response.data); 
+          if (response.data.success) {
+              console.log('User Data:', response.data.user);  
+          }
+      }).catch(function(error) {
+          console.error('Error fetching user data:', error);
+          if (error.status === 401) {
+              $cookies.remove('token');
+              $location.path('/login');
+          }
+      });
+  }
+
+  // Initialize Bootstrap components
+  angular.element(document).ready(function () {
+    // Call fetchUserData when dashboard loads
+    fetchUserData();
+    
+    // Initialize the logout modal
+    logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'));
+    
+    // Handle sidebar close on mobile
+    var sidebarEl = document.getElementById('sidebar');
+    var sidebar = bootstrap.Offcanvas.getOrCreateInstance(sidebarEl);
+    
+    if (window.innerWidth < 992) {
+        var links = sidebarEl.querySelectorAll('.nav-link:not([ng-click])');
+        links.forEach(function(link) {
+            link.addEventListener('click', function() {
+                sidebar.hide();
             });
-        }
-    });
+        });
+    }
+  });
 
-    // Show confirmation modal
-    $scope.logout = function() {
-        logoutModal.show();
-    };
+  // Logout functions
+  $scope.logout = function() {
+    logoutModal.show();
+  };
 
-    // Handle confirmed logout
-    $scope.confirmLogout = function() {
-        $cookies.remove('token');
-        logoutModal.hide();
-        $location.path('/login');
-    };
+  $scope.confirmLogout = function() {
+    $cookies.remove('token');
+    logoutModal.hide();
+    $location.path('/login');
+  };
 });
