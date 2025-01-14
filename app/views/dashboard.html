@@ -1,6 +1,6 @@
 <div class="d-flex">
 
-    <div class="offcanvas-lg offcanvas-end bg-success text-white" tabindex="-1" id="sidebar" style="width: 280px;">
+    <div class="offcanvas-lg offcanvas-start bg-success text-white" tabindex="-1" id="sidebar" style="width: 280px;">
         <div class="offcanvas-header border-bottom border-secondary">
             <h5 class="offcanvas-title">پنل مدیریت</h5>
             <button type="button" class="btn-close btn-close-white d-lg-none" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close"></button>
@@ -55,3 +55,22 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">تایید خروج</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-danger" ng-click="confirmLogout()">خروج</button>
+            </div>
+        </div>
+    </div>
+</div>
+
