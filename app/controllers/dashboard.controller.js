@@ -15,6 +15,9 @@ app.controller("DashboardController", function ($scope, $http, $location, $cooki
       }).then(function(response) {
           console.log('API Response:', response.data); 
           if (response.data.success) {
+              $scope.userData = response.data.user;
+              response.data.user.avatar = 'https://www.shopgram123.ir' + response.data.user.avatar;
+                $scope.userData = response.data.user;
               console.log('User Data:', response.data.user);  
           }
       }).catch(function(error) {
