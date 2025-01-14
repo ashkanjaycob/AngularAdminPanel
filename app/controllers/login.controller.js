@@ -1,4 +1,4 @@
-app.controller("LoginController", function ($scope, $http, $location) {
+app.controller("LoginController", function ($scope, $http, $location, $cookies) {
   $scope.credentials = {
     username: "",
     password: "",
@@ -30,10 +30,12 @@ app.controller("LoginController", function ($scope, $http, $location) {
       },
     }).then(
       function successCallback(response) {
+        $cookies.put('token', response.data.token);
         console.log("Login successful:", response.data);
         $location.path("/");
       },
       function errorCallback(error) {
+        alert(error.data.description);
         console.error("Login failed:", error.data);
       }
     );

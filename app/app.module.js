@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngRoute"]).config([
+var app = angular.module("app", ["ngRoute" , 'ngCookies']).config([
   "$routeProvider",
   "$locationProvider",
   function ($routeProvider, $locationProvider) {
