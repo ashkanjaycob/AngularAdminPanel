@@ -22,7 +22,7 @@ app.controller("EditUserController", function ($scope, $routeParams , UserServic
 
     $http({
       method: "PUT",
-      url: "/api/user/contacts/" + $scope.user.id,
+      url: "/api/manage/users/" + $scope.user.id,
       headers: {
         Authorization: "Bearer " + $cookies.get("token"),
         Accept: "application/json",

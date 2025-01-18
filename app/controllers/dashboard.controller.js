@@ -41,7 +41,7 @@ app.controller(
       console.log("loadUsers function called");
       $http({
         method: "GET",
-        url: "/api/user/contacts",
+        url: "/api/manage/users",
         headers: {
           Authorization: "Bearer " + $cookies.get("token"),
         },
@@ -49,7 +49,7 @@ app.controller(
         .then(function (response) {
           console.log("API response:", response);
           if (response.data.success) {
-            $scope.users = response.data.contacts;
+            $scope.users = response.data.users;
             $scope.showUsers = true;
           }
         })
@@ -59,6 +59,48 @@ app.controller(
             $cookies.remove("token");
             $location.path("/login");
           }
+        });
+    };
+
+    $scope.deleteUserWithConfirmation = function (user) {
+      if (!user || !user.id) {
+        console.error("User or user ID is not defined.");
+        return;
+      }
+
+      $scope.userToDelete = user; // ذخیره کاربر برای تأیید حذف
+      const deleteModal = new bootstrap.Modal(
+        document.getElementById("deleteUserModal")
+      );
+      deleteModal.show();
+    };
+
+    $scope.confirmDeleteUser = function () {
+      if (!$scope.userToDelete || !$scope.userToDelete.id) {
+        console.error("No user selected for deletion.");
+        return;
+      }
+
+      $http({
+        method: "DELETE",
+        url: "/api/manage/users?identities=" + $scope.userToDelete.id,
+        headers: {
+          Authorization: "Bearer " + $cookies.get("token"),
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then(function (response) {
+          console.log("User deleted successfully:", response);
+          if (response.data.success) {
+            $scope.users = $scope.users.filter(
+              (user) => user.id !== $scope.userToDelete.id
+            );
+            $scope.userToDelete = null; // پاک‌سازی داده کاربر
+          }
+        })
+        .catch(function (error) {
+          console.error("Error deleting user:", error);
         });
     };
 
