@@ -36,30 +36,61 @@ app.controller(
 
     $scope.showUsers = false;
     $scope.users = [];
-    
+
     $scope.loadUsers = function () {
-      console.log('loadUsers function called');
+      console.log("loadUsers function called");
       $http({
-        method: 'GET',
-        url: '/api/user/contacts',
+        method: "GET",
+        url: "/api/user/contacts",
         headers: {
-          Authorization: 'Bearer ' + $cookies.get('token')
-        }
+          Authorization: "Bearer " + $cookies.get("token"),
+        },
       })
-      .then(function(response) {
-        console.log('API response:', response);
-        if (response.data.success) {
-          $scope.users = response.data.contacts;
-          $scope.showUsers = true;
-        }
+        .then(function (response) {
+          console.log("API response:", response);
+          if (response.data.success) {
+            $scope.users = response.data.contacts;
+            $scope.showUsers = true;
+          }
+        })
+        .catch(function (error) {
+          console.error("Error loading users:", error);
+          if (error.status === 401) {
+            $cookies.remove("token");
+            $location.path("/login");
+          }
+        });
+    };
+
+    $scope.updateUser = function (userId, updatedUserData) {
+      console.log("Update User function called");
+      console.log(userId);
+      console.log(updatedUserData);
+
+      $http({
+        method: "PUT",
+        url: "/api/user/contacts/" + userId,
+        headers: {
+          Authorization: "Bearer " + $cookies.get("token"),
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: { name: updatedUserData },
       })
-      .catch(function(error) {
-        console.error('Error loading users:', error);
-        if (error.status === 401) {
-          $cookies.remove('token');
-          $location.path('/login');
-        }
-      });
+        .then(function (response) {
+          console.log("API response:", response);
+          if (response.data.success) {
+            $scope.users = response.data.contacts;
+            $scope.showUsers = true;
+          }
+        })
+        .catch(function (error) {
+          console.error("Error updating user:", error);
+          if (error.status === 401) {
+            $cookies.remove("token");
+            $location.path("/login");
+          }
+        });
     };
 
     // Initialize Bootstrap components

@@ -40,6 +40,18 @@ var app = angular.module("app", ["ngRoute", "ngCookies"]).config([
           }]
         }
       })
+      .when("/edituser", {
+        templateUrl: "app/views/editUser.html",
+        controller: "EditController",
+        resolve: {
+          auth: ['AuthService', '$location', function(AuthService, $location) {
+            if (!AuthService.isAuthenticated()) {
+              $location.path('/login');
+            }
+            return true;
+          }]
+        }
+      })
       .otherwise({
         redirectTo: function() {
           return AuthService.isAuthenticated() ? '/dashboard' : '/login';

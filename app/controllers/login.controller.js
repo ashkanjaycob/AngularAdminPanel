@@ -6,9 +6,9 @@ app.controller(
       password: "",
     };
     $scope.showPassword = false;
-    
-    $scope.togglePassword = function() {
-        $scope.showPassword = !$scope.showPassword;
+
+    $scope.togglePassword = function () {
+      $scope.showPassword = !$scope.showPassword;
     };
     $scope.errorMessage = "";
 
@@ -54,7 +54,7 @@ app.controller(
         function successCallback(response) {
           $cookies.put("token", response.data.token);
           console.log("Login successful:", response.data);
-          $location.path("/");
+          $location.path("/dashboard");
         },
         function errorCallback(error) {
           $scope.errorMessage = error.data.description;
