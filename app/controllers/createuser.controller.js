@@ -1,0 +1,96 @@
+app.controller(
+  "CreateUser",
+  function ($scope, $location, $location, $http, $cookies) {
+    $scope.welcomeMessage = "ایجاد کاربر";
+
+    $scope.goBack = function () {
+      console.log("Navigating back to dashboard.");
+      $location.path("/dashboard");
+    };
+
+    $scope.newUser = {};
+
+    function showToast(message) {
+      var toastElement = document.getElementById("errorToast");
+      var toastMessage = document.getElementById("toastMessage");
+
+      if (!toastElement || !toastMessage) {
+        console.error("Toast element not found in DOM.");
+        return;
+      }
+
+      toastMessage.innerText = message;
+      var toast = new bootstrap.Toast(toastElement, {
+        animation: true,
+        autohide: true,
+        delay: 3000,
+      });
+      toast.show();
+    }
+
+    $scope.validateAndCreateUser = function () {
+      const { name, mobile, email } = $scope.newUser;
+
+      if (!name || name.trim().length === 0) {
+        showToast("نام و نام خانوادگی نمی‌تواند خالی باشد.");
+        return;
+      }
+      if (!/^\d{11}$/.test(mobile)) {
+        showToast("شماره موبایل باید عددی و ۱۱ رقمی باشد.");
+        return;
+      }
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast("فرمت ایمیل وارد شده نامعتبر است.");
+        return;
+      }
+
+      $scope.createUser();
+    };
+
+    //  ایجاد کاربر
+    $scope.createUser = function () {
+      $http({
+        method: "POST",
+        url: "/api/manage/users",
+        headers: {
+          Authorization: "Bearer " + $cookies.get("token"),
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: $scope.newUser,
+      })
+        .then(function (response) {
+          console.log("User created successfully:", response);
+
+          if (response.status === 200) {
+            $scope.newUser = {};
+            showToast(response.data.description);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error creating user:", error);
+          // بررسی وجود خطاها در context
+          if (error.data && error.data.context) {
+            const contextErrors = error.data.context;
+            for (const field in contextErrors) {
+              if (contextErrors[field]) {
+                showToast(contextErrors[field]);
+                return;
+              }
+            }
+          }
+        });
+    };
+
+    function showToast(message) {
+      var toastElement = document.getElementById("errorToast");
+      document.getElementById("toastMessage").innerText = message;
+      var toast = new bootstrap.Toast(toastElement, {
+        animation: true,
+        autohide: true,
+        delay: 3000,
+      });
+      toast.show();
+    }
+  }
+);

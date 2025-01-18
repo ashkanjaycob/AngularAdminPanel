@@ -1,0 +1,113 @@
+<div ng-controller="CreateUser">
+  <div
+    class="toast align-items-center text-white bg-danger border-0"
+    id="errorToast"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    style="position: fixed; top: 10px; right: 10px; z-index: 1055"
+  >
+    <div class="d-flex">
+      <div class="toast-body" id="toastMessage"></div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+  </div>
+
+  <div class="container p-4 min-vh-100">
+    <div class="col-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">مدیریت</li>
+          <li class="breadcrumb-item active" aria-current="page">کاربران</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            ایجاد کاربر
+          </li>
+        </ol>
+      </nav>
+
+      <h1 class="py-4">{{welcomeMessage}}</h1>
+
+      <form ng-submit="updateUser()">
+        <div class="row justify-content-start align-items-start">
+          <!-- Name -->
+          <div class="col-12 col-md-5">
+            <div class="input-group row align-items-end">
+              <label for="name" class="my-2"
+                >نام و نام خانوادگی
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  id="name"
+                  ng-model="newUser.name"
+                />
+              </label>
+            </div>
+          </div>
+
+          <!-- Mobile -->
+          <div class="col-12 col-md-5">
+            <div class="input-group row align-items-start">
+              <label for="mobile" class="my-2"
+                >شماره موبایل
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  id="mobile"
+                  ng-model="newUser.mobile"
+                />
+              </label>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-12 col-md-5">
+            <div class="input-group row align-items-start">
+              <label for="email" class="my-2"
+                >ایمیل کاربری
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  id="email"
+                  ng-model="newUser.email"
+                />
+              </label>
+            </div>
+          </div>
+
+          <!-- City -->
+          <div class="col-12 col-md-5">
+            <div class="input-group row align-items-start w-100">
+              <label for="username" class="my-2"
+                >نام کاربری
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  id="username"
+                  ng-model="newUser.username"
+                  placeholder="ساخت تصادفی با خالی ماندن"
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4" />
+        <div>
+          <button
+            type="submit"
+            class="btn btn-success"
+            ng-click="validateAndCreateUser()"
+          >
+            ذخیره
+          </button>
+          <button type="button" class="btn" ng-click="goBack()">انصراف</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -52,6 +52,22 @@ var app = angular.module("app", ["ngRoute", "ngCookies"]).config([
           ],
         },
       })
+      .when("/createuser", {
+        templateUrl: "app/views/createuser.html",
+        controller: "CreateUser",
+        resolve: {
+          auth: [
+            "AuthService",
+            "$location",
+            function (AuthService, $location) {
+              if (!AuthService.isAuthenticated()) {
+                $location.path("/login");
+              }
+              return true;
+            },
+          ],
+        },
+      })
       .when("/edituser", {
         templateUrl: "app/views/editUser.html",
         controller: "EditUserController",
