@@ -1,8 +1,6 @@
-<div ng-controller="EditController">
+<div ng-controller="EditUserController">
   <div class="container p-4 min-vh-100">
-    <!-- Users list -->
     <div class="col-12">
-
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">مدیریت</li>
@@ -15,81 +13,51 @@
 
       <h1 class="py-4">{{welcomeMessage}}</h1>
 
-      <form ng-submit="validateAndLogin()">
-
+      <form ng-submit="updateUser()">
         <div class="row justify-content-start align-items-start">
-        <div class="col-12 col-md-5">
-          <div class="input-group row align-items-end">
-            <label for="name" class="my-2">نام و نام خانوادگی
-            <input
-              type="text"
-              class="form-control p-3"
-              id="name"
-              ng-model="credentials.username"
-            />
-        </label>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-5">
-         <div class="input-group row align-items-start">
-        <label for="mobile"  class="my-2">شماره موبایل
-            <input
-              type="number"
-              class="form-control p-3"
-              id="mobile"
-              ng-model="credentials.password"
-              required
-            />
-        </label>
-          </div>
-        </div>
-
+          <!-- Name -->
           <div class="col-12 col-md-5">
-              <div class="input-group  row align-items-start">
-              <label for="email"  class="my-2">ایمیل کاربری
-            <input
-              type="email"
-              class="form-control p-3"
-              id="email"
-              ng-model="credentials.password"
-              required
-            />
-        </div>
-        </label>
+            <div class="input-group row align-items-end">
+              <label for="name" class="my-2">نام و نام خانوادگی
+                <input type="text" class="form-control p-3" id="name" ng-model="user.name" required />
+              </label>
+            </div>
           </div>
 
+          <!-- Mobile -->
           <div class="col-12 col-md-5">
-              <div class="input-group row align-items-start w-100">
-              <label for="city"  class="my-2">شهر
-            <input
-              type="text"
-              class="form-control p-3"
-              id="city"
-              ng-model="credentials.city.name"
-              required
-            />
-        </div>
-        </label>
+            <div class="input-group row align-items-start">
+              <label for="mobile" class="my-2">شماره موبایل
+                <input type="text" class="form-control p-3" id="mobile" ng-model="user.mobile" required />
+              </label>
+            </div>
           </div>
-        </div>
 
+          <!-- Email -->
+          <div class="col-12 col-md-5">
+            <div class="input-group row align-items-start">
+              <label for="email" class="my-2">ایمیل کاربری
+                <input type="text" class="form-control p-3" id="email" ng-model="user.email" />
+              </label>
+            </div>
+          </div>
+
+          <!-- City -->
+          <div class="col-12 col-md-5">
+            <div class="input-group row align-items-start w-100">
+              <label for="city" class="my-2">شهر
+                <input type="text" class="form-control p-3" id="city" ng-model="user.address" required />
+              </label>
+            </div>
+          </div>
         </div>
 
         <hr class="my-4">
-
         <div>
-            <button type="submit" class="btn btn-success">
-                ذخیره
-            </button>
-            <button type="submit" class="btn">
-                انصراف
-            </button>
+          <button type="submit" class="btn btn-success"  ng-click="updateUser()">ذخیره</button>
+          <button type="button" class="btn" ng-click="goBack()">انصراف</button>
         </div>
-
-
       </form>
-
     </div>
   </div>
 </div>

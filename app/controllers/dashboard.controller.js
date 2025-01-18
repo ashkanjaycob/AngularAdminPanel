@@ -1,6 +1,6 @@
 app.controller(
   "DashboardController",
-  function ($scope, $http, $location, $cookies) {
+  function ($scope, $http, $location, $cookies, UserService) {
     $scope.welcomeMessage = "به پنل مدیریت خوش آمدید";
     var logoutModal;
 
@@ -62,35 +62,13 @@ app.controller(
         });
     };
 
-    $scope.updateUser = function (userId, updatedUserData) {
-      console.log("Update User function called");
-      console.log(userId);
-      console.log(updatedUserData);
-
-      $http({
-        method: "PUT",
-        url: "/api/user/contacts/" + userId,
-        headers: {
-          Authorization: "Bearer " + $cookies.get("token"),
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        data: { name: updatedUserData },
-      })
-        .then(function (response) {
-          console.log("API response:", response);
-          if (response.data.success) {
-            $scope.users = response.data.contacts;
-            $scope.showUsers = true;
-          }
-        })
-        .catch(function (error) {
-          console.error("Error updating user:", error);
-          if (error.status === 401) {
-            $cookies.remove("token");
-            $location.path("/login");
-          }
-        });
+    $scope.goToEditUser = function (user) {
+      if (user) {
+        UserService.setSelectedUser(user);
+        $location.path("/edituser");
+      } else {
+        console.error("No user selected!");
+      }
     };
 
     // Initialize Bootstrap components

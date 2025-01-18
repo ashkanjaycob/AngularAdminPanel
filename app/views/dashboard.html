@@ -1,9 +1,9 @@
 <div class="d-flex" ng-controller="DashboardController">
+  <div class="container bg-transparent">
   <div class="flex-grow-1">
-    <div class="container-fluid p-4 bg-body-tertiary min-vh-100">
+    <div class="container p-4 min-vh-100">
       <div class="row">
-
-        <div class="row justify-content-between align-items-center">
+        <div class="row justify-content-between align-items-center my-4">
           <span class="col-12 col-md-6">
             <h5>
               {{welcomeMessage}} , {{userData.name}}
@@ -15,11 +15,6 @@
               <i class="bi bi-people ms-2"></i>
               کاربران
             </button>
-  
-            <button class="btn btn-success w-25" ng-click="updateUser(100525519 , 'علی یعقوبی ')">
-              <i class="bi bi-people ms-2"></i>
-              آپدیت محمد محمدی
-            </button>
 
             <button href="#" class="btn btn-danger w-25" ng-click="logout()">
               <i class="bi bi-box-arrow-right ms-2"></i>
@@ -27,7 +22,7 @@
             </button>
           </span>
         </div>
-
+          <hr>
           <!-- Users list -->
           <div class="col-12" ng-if="showUsers">
             <nav aria-label="breadcrumb">
@@ -40,6 +35,7 @@
             </nav>
 
             <!-- Users list -->
+
             <div class="col-12" ng-if="showUsers">
               <div
                 class="d-flex justify-content-between align-items-center py-3"
@@ -50,7 +46,7 @@
                 </div>
               </div>
 
-              <hr />
+              <hr class="text-tertiary" />
               <div class="card border-0 shadow-sm">
                 <div class="card-body text-start p-0">
                   <div class="table-responsive">
@@ -62,7 +58,7 @@
                           <th class="border-0 p-3">نام و نام خانوادگی</th>
                           <th class="border-0 p-3">شماره موبایل</th>
                           <th class="border-0 p-3">ایمیل</th>
-                          <th class="border-0 p-3">شهر</th>
+                          <th class="border-0 p-3">آدرس</th>
                           <th class="border-0 p-3 text-center">عملیات</th>
                         </tr>
                       </thead>
@@ -73,7 +69,7 @@
                           <td class="p-3">
                             {{user.email || 'ایمیلی ثبت نشده است !'}}
                           </td>
-                          <td class="p-3">{{user.city.name}}</td>
+                          <td class="p-3">{{user.address}}</td>
                           <td class="p-3 text-center">
                             <div class="dropdown">
                               <button
@@ -84,7 +80,7 @@
                               </button>
                               <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                  <a class="dropdown-item" ng-href="/edituser" 
+                                  <a class="dropdown-item" ng-click="goToEditUser(user)" 
                                     ><i class="bi bi-pencil me-2"></i>ویرایش</a
                                   >
                                 </li>
@@ -109,9 +105,10 @@
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+
         </div>
-      </div>
+    </div>
 
       <div
         class="modal fade"
@@ -155,4 +152,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
