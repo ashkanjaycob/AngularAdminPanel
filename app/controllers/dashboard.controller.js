@@ -6,6 +6,7 @@ app.controller(
 
     // Fetch user data
     function fetchUserData() {
+      $scope.isLoading = true;
       $http({
         method: "GET",
         url: "/api/user",
@@ -16,6 +17,7 @@ app.controller(
         },
       })
         .then(function (response) {
+          $scope.isLoading = true;
           console.log("API Response:", response.data);
           if (response.data.success) {
             $scope.userData = response.data.user;
@@ -31,13 +33,16 @@ app.controller(
             $cookies.remove("token");
             $location.path("/login");
           }
+        })
+        .finally(function () {
+          $scope.isLoading = false; // پایان لودینگ
         });
     }
 
     $scope.showUsers = false;
     $scope.users = [];
 
-    $scope.loadUsers = function () {
+    function loadUsers() {
       console.log("loadUsers function called");
       $http({
         method: "GET",
@@ -59,8 +64,11 @@ app.controller(
             $cookies.remove("token");
             $location.path("/login");
           }
+        })
+        .finally(function () {
+          $scope.isLoading = false;
         });
-    };
+    }
 
     $scope.deleteUserWithConfirmation = function (user) {
       if (!user || !user.id) {
@@ -113,37 +121,45 @@ app.controller(
       }
     };
 
-    // Initialize Bootstrap components
-    angular.element(document).ready(function () {
-      // Call fetchUserData when dashboard loads
-      fetchUserData();
-
-      // Initialize the logout modal
-      logoutModal = new bootstrap.Modal(document.getElementById("logoutModal"));
-
-      // Handle sidebar close on mobile
-      var sidebarEl = document.getElementById("sidebar");
-      var sidebar = bootstrap.Offcanvas.getOrCreateInstance(sidebarEl);
-
-      if (window.innerWidth < 992) {
-        var links = sidebarEl.querySelectorAll(".nav-link:not([ng-click])");
-        links.forEach(function (link) {
-          link.addEventListener("click", function () {
-            sidebar.hide();
+       // Initialize Bootstrap components
+       angular.element(document).ready(function () {
+        // Call fetchUserData when dashboard loads
+        fetchUserData();
+        loadUsers();
+        // Initialize the logout modal
+        logoutModal = new bootstrap.Modal(document.getElementById("logoutModal"));
+  
+        // Handle sidebar close on mobile
+        var sidebarEl = document.getElementById("sidebar");
+        var sidebar = bootstrap.Offcanvas.getOrCreateInstance(sidebarEl);
+  
+        if (window.innerWidth < 992) {
+          var links = sidebarEl.querySelectorAll(".nav-link:not([ng-click])");
+          links.forEach(function (link) {
+            link.addEventListener("click", function () {
+              sidebar.hide();
+            });
           });
-        });
-      }
-    });
-
-    // Logout functions
-    $scope.logout = function () {
-      logoutModal.show();
+        }
+      });
+  
+      // Logout functions
+      $scope.logout = function () {
+        logoutModal.show();
+      };
+  
+      $scope.confirmLogout = function () {
+        console.log("Logging out...");
+        $cookies.remove("token");
+        logoutModal.hide();
+        setTimeout(function () {
+            $location.path("/login");
+            $scope.$apply();
+        }, 200);
     };
-
-    $scope.confirmLogout = function () {
-      $cookies.remove("token");
-      logoutModal.hide();
-      $location.path("/login");
-    };
+    $scope.confirmLogoutaaa = function () {
+      console.log("sadasd");
+      
+    }
   }
 );

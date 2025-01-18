@@ -29,7 +29,7 @@ app.controller(
     }
 
     $scope.validateAndCreateUser = function () {
-      const { name, mobile, email } = $scope.newUser;
+      const { name, mobile } = $scope.newUser;
 
       if (!name || name.trim().length === 0) {
         showToast("نام و نام خانوادگی نمی‌تواند خالی باشد.");
@@ -39,16 +39,13 @@ app.controller(
         showToast("شماره موبایل باید عددی و ۱۱ رقمی باشد.");
         return;
       }
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showToast("فرمت ایمیل وارد شده نامعتبر است.");
-        return;
-      }
 
       $scope.createUser();
     };
 
     //  ایجاد کاربر
     $scope.createUser = function () {
+      $scope.isLoading = true;
       $http({
         method: "POST",
         url: "/api/manage/users",
@@ -79,6 +76,9 @@ app.controller(
               }
             }
           }
+        })
+        .finally(function () {
+          $scope.isLoading = false;
         });
     };
 
