@@ -39,12 +39,16 @@ app.controller(
         showToast("شماره موبایل باید عددی و ۱۱ رقمی باشد.");
         return;
       }
-
-      $scope.createUser();
+      const requestData = {
+        ...$scope.newUser,
+        status: "approved", // اضافه کردن مقدار برای فعال بودن
+      };
+      $scope.createUser(requestData);
     };
 
+
     //  ایجاد کاربر
-    $scope.createUser = function () {
+    $scope.createUser = function (requestData) {
       $scope.isLoading = true;
       $http({
         method: "POST",
@@ -54,7 +58,7 @@ app.controller(
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        data: $scope.newUser,
+        data: requestData,
       })
         .then(function (response) {
           console.log("User created successfully:", response);
