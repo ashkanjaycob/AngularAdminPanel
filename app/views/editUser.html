@@ -18,8 +18,15 @@
           <!-- Name -->
           <div class="col-12 col-md-5">
             <div class="input-group row align-items-end">
-              <label for="name" class="my-2">نام و نام خانوادگی
-                <input type="text" class="form-control p-3" id="name" ng-model="user.name" required />
+              <label for="name" class="my-2"
+                >نام و نام خانوادگی
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  id="name"
+                  ng-model="user.name"
+                  required
+                />
               </label>
             </div>
           </div>
@@ -27,8 +34,15 @@
           <!-- Mobile -->
           <div class="col-12 col-md-5">
             <div class="input-group row align-items-start">
-              <label for="mobile" class="my-2">شماره موبایل
-                <input type="text" class="form-control p-3" id="mobile" ng-model="user.mobile" required />
+              <label for="mobile" class="my-2"
+                >شماره موبایل
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  id="mobile"
+                  ng-model="user.mobile"
+                  required
+                />
               </label>
             </div>
           </div>
@@ -36,8 +50,14 @@
           <!-- Email -->
           <div class="col-12 col-md-5">
             <div class="input-group row align-items-start">
-              <label for="email" class="my-2">ایمیل کاربری
-                <input type="text" class="form-control p-3" id="email" ng-model="user.email" />
+              <label for="email" class="my-2"
+                >ایمیل کاربری
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  id="email"
+                  ng-model="user.email"
+                />
               </label>
             </div>
           </div>
@@ -45,16 +65,39 @@
           <!-- City -->
           <div class="col-12 col-md-5">
             <div class="input-group row align-items-start w-100">
-              <label for="username" class="my-2">نام کاربری
-                <input type="text" class="form-control p-3" id="username" ng-model="user.username" placeholder="ساخت تصادفی با خالی ماندن" required />
+              <label for="username" class="my-2"
+                >نام کاربری
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  id="username"
+                  ng-model="user.username"
+                  placeholder="ساخت تصادفی با خالی ماندن"
+                  required
+                />
               </label>
             </div>
           </div>
         </div>
 
-        <hr class="my-4">
+        <hr class="my-4" />
         <div>
-          <button type="submit" class="btn btn-success"  ng-click="updateUser()">ذخیره</button>
+          <button
+            ng-if="!isLoading"
+            type="submit"
+            class="btn btn-success"
+            ng-click="updateUser()"
+          >
+            ذخیره
+          </button>
+          <button
+            ng-if="isLoading"
+            type="submit"
+            class="btn btn-secondary"
+            disabled
+          >
+            صبر کنید . . .
+          </button>
           <button type="button" class="btn" ng-click="goBack()">انصراف</button>
         </div>
       </form>
