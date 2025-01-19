@@ -34,16 +34,18 @@
           </span>
         </div>
           <hr>
-          <!-- Users list -->
+
           <div class="col-12" ng-if="showUsers">
-            <nav aria-label="breadcrumb">
+
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item">مدیریت</li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  کاربران
+                <li class="breadcrumb-item" ng-repeat="breadcrumb in breadcrumbs" ng-class="{'active': $last}" aria-current="{{$last ? 'page' : undefined}}">
+                  <a ng-if="!$last" href="{{breadcrumb.url}}">{{breadcrumb.label}}</a>
+                  <span ng-if="$last">{{breadcrumb.label}}</span>
                 </li>
               </ol>
             </nav>
+            
 
             <!-- Users list -->
 

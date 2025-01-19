@@ -1,5 +1,4 @@
 <div ng-controller="CreateUser">
-
   <div
     class="toast align-items-center text-white bg-danger border-0"
     id="errorToast"
@@ -21,12 +20,16 @@
 
   <div class="container p-4 min-vh-100">
     <div class="col-12">
-      <nav aria-label="breadcrumb">
+      <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">مدیریت</li>
-          <li class="breadcrumb-item active" aria-current="page">کاربران</li>
-          <li class="breadcrumb-item active" aria-current="page">
-            ایجاد کاربر
+          <li
+            class="breadcrumb-item"
+            ng-repeat="breadcrumb in breadcrumbs"
+            ng-class="{'active': $last}"
+            aria-current="{{$last ? 'page' : undefined}}"
+          >
+            <a ng-if="!$last" href="{{breadcrumb.url}}">{{breadcrumb.label}}</a>
+            <span ng-if="$last">{{breadcrumb.label}}</span>
           </li>
         </ol>
       </nav>

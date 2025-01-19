@@ -2,7 +2,21 @@ app.controller(
   "CreateUser",
   function ($scope, $location, $location, $http, $cookies) {
     $scope.welcomeMessage = "ایجاد کاربر";
+    $scope.breadcrumbs = [
+      { label: "مدیریت", url: "/dashboard" },
+      { label: "کاربران", url: "/users" },
+    ];
 
+    $scope.$on("$routeChangeSuccess", function (event, currentRoute) {
+      const path = currentRoute.originalPath;
+      if (path === "/createuser") {
+        $scope.breadcrumbs = [
+          { label: "مدیریت", url: "/dashboard" },
+          { label: "کاربران", url: "/dashboard" },
+          { label: "ویرایش کاربر", url: "/createuser" },
+        ];
+      }
+    }); 
     $scope.goBack = function () {
       console.log("Navigating back to dashboard.");
       $location.path("/dashboard");
