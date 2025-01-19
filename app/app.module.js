@@ -86,7 +86,7 @@ var app = angular.module("app", ["ngRoute", "ngCookies"]).config([
       })
       .otherwise({
         redirectTo: function () {
-          return AuthService.isAuthenticated() ? "/dashboard" : "/login";
+          return "/login";
         },
       });
   },

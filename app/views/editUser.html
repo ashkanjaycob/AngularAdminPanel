@@ -113,6 +113,49 @@
           </div>
         </div>
 
+        <div class="col-12 col-md-5">
+          <div class="dropdown w-100 mt-4">
+            <button
+              class="btn btn-muted dropdown-toggle w-100"
+              type="button"
+              id="statusDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              وضعیت: {{ user.statusLabel || 'تأیید شده' }}
+            </button>
+            <ul class="dropdown-menu w-100" aria-labelledby="statusDropdown">
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-start"
+                  href="#"
+                  ng-click="user.status='approved'; user.statusLabel='تأیید شده'"
+                >
+                  <i class="bi bi-circle-fill text-success me-2"></i> تأیید شده
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="#"
+                  ng-click="user.status='pending'; user.statusLabel='در انتظار'"
+                >
+                  <i class="bi bi-circle-fill text-warning me-2"></i> در انتظار
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="#"
+                  ng-click="user.status='suspended'; user.statusLabel='رد شده'"
+                >
+                  <i class="bi bi-circle-fill text-danger me-2"></i> رد شده
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <hr class="my-4 cutomHr" />
 
         <div>

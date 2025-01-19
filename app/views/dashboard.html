@@ -72,6 +72,7 @@
                           <th class="border-0 p-3">شماره موبایل</th>
                           <th class="border-0 p-3">ایمیل</th>
                           <th class="border-0 p-3">نام کاربری</th>
+                          <th class="border-0 p-3">وضعیت</th>
                           <th class="border-0 p-3 text-center">عملیات</th>
                         </tr>
                       </thead>
@@ -83,6 +84,23 @@
                             {{user.email || 'ایمیلی ثبت نشده است !'}}
                           </td>
                           <td class="p-3">{{user.username}}</td>
+                          <td class="p-3">
+                            <span
+                              ng-if="user.status && user.status.includes('approved')"
+                              class="badge rounded-pill text-bg-success"
+                              >فعال</span
+                            >
+                            <span
+                              ng-if="user.status && user.status.includes('pending')"
+                              class="badge rounded-pill text-bg-warning"
+                              >منتظر تایید</span
+                            >
+                            <span
+                              ng-if="user.status && user.status.includes('suspended')"
+                              class="badge rounded-pill text-bg-danger"
+                              >غیر فعال</span
+                            >
+                          </td>
                           <td class="p-3 text-center">
                             <div class="dropdown">
                               <button
