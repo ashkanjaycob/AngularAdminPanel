@@ -39,6 +39,7 @@ app.controller(
     };
 
     $scope.login = function () {
+      $scope.isLoading = true;
       $http({
         method: "POST",
         url: "/api/user/create-session",
@@ -49,24 +50,28 @@ app.controller(
         headers: {
           "Content-Type": "application/json",
         },
-      }).then(
-        function successCallback(response) {
-          $cookies.put("token", response.data.token);
-          $location.path("/dashboard");
-        },
-        function errorCallback(error) {
-          $scope.errorMessage = error.data.description;
-          // Initialize and show the toast
-          var toastElement = document.getElementById("errorToast");
-          var toast = new bootstrap.Toast(toastElement, {
-            animation: true,
-            autohide: true,
-            delay: 2000,
-          });
-          toast.show();
-          console.error("Login failed:", error.data);
-        },
-      );
+      })
+        .then(
+          function successCallback(response) {
+            $cookies.put("token", response.data.token);
+            $location.path("/dashboard");
+          },
+          function errorCallback(error) {
+            $scope.errorMessage = error.data.description;
+            // Initialize and show the toast
+            var toastElement = document.getElementById("errorToast");
+            var toast = new bootstrap.Toast(toastElement, {
+              animation: true,
+              autohide: true,
+              delay: 2000,
+            });
+            toast.show();
+            console.error("Login failed:", error.data);
+          }
+        )
+        .finally(function () {
+          $scope.isLoading = false;
+        });
     };
-  },
+  }
 );

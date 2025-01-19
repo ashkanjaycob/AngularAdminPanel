@@ -67,7 +67,14 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-success w-100">
+            <button ng-if="isLoading" class="btn btn-secondary w-100">
+              در حال ورورد . . .
+            </button>
+            <button
+              ng-if="!isLoading"
+              type="submit"
+              class="btn btn-success w-100"
+            >
               ورود
               <i class="bi bi-box-arrow-in-left me-2"></i>
             </button>
