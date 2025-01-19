@@ -67,11 +67,11 @@ app.controller(
             });
             toast.show();
             console.error("Login failed:", error.data);
-          }
+          },
         )
         .finally(function () {
           $scope.isLoading = false;
         });
     };
-  }
+  },
 );
