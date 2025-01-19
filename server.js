@@ -22,7 +22,7 @@ app.use(
       proxyReqOpts.headers["Content-Type"] = "application/json";
       return proxyReqOpts;
     },
-  })
+  }),
 );
 
 app.get("*", (req, res) => {
