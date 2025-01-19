@@ -4,20 +4,20 @@ app.controller(
     $scope.welcomeMessage = "به پنل مدیریت خوش آمدید";
 
     $scope.breadcrumbs = [
-      { label: 'مدیریت', url: '/dashboard' },
-      { label: 'کاربران', url: '/users' },
+      { label: "مدیریت", url: "/dashboard" },
+      { label: "کاربران", url: "/users" },
     ];
-    
-    $scope.$on('$routeChangeSuccess', function(event, currentRoute) {
-      const path = currentRoute.originalPath; 
-      if (path === '/users') {
+
+    $scope.$on("$routeChangeSuccess", function (event, currentRoute) {
+      const path = currentRoute.originalPath;
+      if (path === "/users") {
         $scope.breadcrumbs = [
-          { label: 'مدیریت', url: '/dashboard' },
-          { label: 'کاربران', url: '/users' },
+          { label: "مدیریت", url: "/dashboard" },
+          { label: "کاربران", url: "/users" },
         ];
       }
     });
-    
+
     var logoutModal;
 
     // Fetch user data
@@ -131,51 +131,50 @@ app.controller(
     $scope.goToEditUser = function (user) {
       if (user) {
         UserService.setSelectedUser(user);
-        $location.path("/edituser");
+        $location.path("/edituser/" + user.id);
       } else {
         console.error("No user selected!");
       }
     };
 
-       // Initialize Bootstrap components
-       angular.element(document).ready(function () {
-        // Call fetchUserData when dashboard loads
-        fetchUserData();
-        loadUsers();
-        // Initialize the logout modal
-        logoutModal = new bootstrap.Modal(document.getElementById("logoutModal"));
-  
-        // Handle sidebar close on mobile
-        var sidebarEl = document.getElementById("sidebar");
-        var sidebar = bootstrap.Offcanvas.getOrCreateInstance(sidebarEl);
-  
-        if (window.innerWidth < 992) {
-          var links = sidebarEl.querySelectorAll(".nav-link:not([ng-click])");
-          links.forEach(function (link) {
-            link.addEventListener("click", function () {
-              sidebar.hide();
-            });
+    // Initialize Bootstrap components
+    angular.element(document).ready(function () {
+      // Call fetchUserData when dashboard loads
+      fetchUserData();
+      loadUsers();
+      // Initialize the logout modal
+      logoutModal = new bootstrap.Modal(document.getElementById("logoutModal"));
+
+      // Handle sidebar close on mobile
+      var sidebarEl = document.getElementById("sidebar");
+      var sidebar = bootstrap.Offcanvas.getOrCreateInstance(sidebarEl);
+
+      if (window.innerWidth < 992) {
+        var links = sidebarEl.querySelectorAll(".nav-link:not([ng-click])");
+        links.forEach(function (link) {
+          link.addEventListener("click", function () {
+            sidebar.hide();
           });
-        }
-      });
-  
-      // Logout functions
-      $scope.logout = function () {
-        logoutModal.show();
-      };
-  
-      $scope.confirmLogout = function () {
-        console.log("Logging out...");
-        $cookies.remove("token");
-        logoutModal.hide();
-        setTimeout(function () {
-            $location.path("/login");
-            $scope.$apply();
-        }, 200);
+        });
+      }
+    });
+
+    // Logout functions
+    $scope.logout = function () {
+      logoutModal.show();
+    };
+
+    $scope.confirmLogout = function () {
+      console.log("Logging out...");
+      $cookies.remove("token");
+      logoutModal.hide();
+      setTimeout(function () {
+        $location.path("/login");
+        $scope.$apply();
+      }, 200);
     };
     $scope.confirmLogoutaaa = function () {
       console.log("sadasd");
-      
-    }
+    };
   }
 );

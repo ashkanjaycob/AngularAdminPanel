@@ -1,7 +1,6 @@
 app.controller(
   "EditUserController",
   function ($scope, $routeParams, UserService, $location, $http, $cookies) {
-    
     $scope.breadcrumbs = [
       { label: "مدیریت", url: "/dashboard" },
       { label: "کاربران", url: "/users" },
@@ -9,7 +8,7 @@ app.controller(
 
     $scope.$on("$routeChangeSuccess", function (event, currentRoute) {
       const path = currentRoute.originalPath;
-      if (path === "/edituser") {
+      if (path === "/edituser/:id") {
         $scope.breadcrumbs = [
           { label: "مدیریت", url: "/dashboard" },
           { label: "کاربران", url: "/dashboard" },
@@ -17,6 +16,8 @@ app.controller(
         ];
       }
     });
+
+    console.log($routeParams);
 
     $scope.welcomeMessage = "ویرایش کاربر";
 

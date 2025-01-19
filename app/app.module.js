@@ -68,7 +68,7 @@ var app = angular.module("app", ["ngRoute", "ngCookies"]).config([
           ],
         },
       })
-      .when("/edituser", {
+      .when("/edituser/:id", {
         templateUrl: "app/views/editUser.html",
         controller: "EditUserController",
         resolve: {
