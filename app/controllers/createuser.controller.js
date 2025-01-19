@@ -1,6 +1,6 @@
 app.controller(
   "CreateUser",
-  function ($scope, $location, $location, $http, $cookies) {
+  function ($scope, $location, $http, $cookies, $timeout) {
     $scope.welcomeMessage = "ایجاد کاربر";
     $scope.breadcrumbs = [
       { label: "مدیریت", url: "/dashboard" },
@@ -76,6 +76,10 @@ app.controller(
           if (response.status === 200) {
             $scope.newUser = {};
             showToast(response.data.description);
+
+            $timeout(function () {
+              $location.path("/dashboard");
+            }, 4000);
           }
         })
         .catch(function (error) {
@@ -102,9 +106,9 @@ app.controller(
       var toast = new bootstrap.Toast(toastElement, {
         animation: true,
         autohide: true,
-        delay: 3000,
+        delay: 2500,
       });
       toast.show();
     }
-  },
+  }
 );

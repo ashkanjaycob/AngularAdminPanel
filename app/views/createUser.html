@@ -1,5 +1,25 @@
 <div ng-controller="CreateUser">
+  
   <div
+    class="toast align-items-center text-white bg-danger border-0"
+    id="errorToast"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    style="position: fixed; top: 10px; right: 10px; z-index: 1055"
+  >
+    <div class="d-flex">
+      <div class="toast-body" id="toastMessage"></div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+  </div>
+
+    <div
     class="toast align-items-center text-white bg-danger border-0"
     id="errorToast"
     role="alert"

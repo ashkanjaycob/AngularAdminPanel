@@ -1,6 +1,14 @@
 app.controller(
   "EditUserController",
-  function ($scope, $routeParams, UserService, $location, $http, $cookies) {
+  function (
+    $scope,
+    $routeParams,
+    UserService,
+    $location,
+    $http,
+    $cookies,
+    $timeout
+  ) {
     $scope.breadcrumbs = [
       { label: "مدیریت", url: "/dashboard" },
       { label: "کاربران", url: "/users" },
@@ -71,7 +79,10 @@ app.controller(
       })
         .then(function (response) {
           if (response.data.success) {
-            $location.path("/dashboard");
+            showToast("کاربر با موفقیت ویرایش شد .");
+            $timeout(function () {
+              $location.path("/dashboard");
+            }, 3500);
           }
         })
         .catch(function (error) {
@@ -87,9 +98,8 @@ app.controller(
             }
           }
         })
-
         .finally(function () {
-          $scope.isLoading = false; // پایان لودینگ
+          $scope.isLoading = false;
         });
     };
 
@@ -103,9 +113,9 @@ app.controller(
       var toast = new bootstrap.Toast(toastElement, {
         animation: true,
         autohide: true,
-        delay: 3000,
+        delay: 2500,
       });
       toast.show();
     }
-  },
+  }
 );
