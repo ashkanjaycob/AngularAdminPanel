@@ -17,16 +17,41 @@ app.controller(
       }
     });
 
-    console.log($routeParams);
-
     $scope.welcomeMessage = "ویرایش کاربر";
+    $scope.isLoading = true;
 
-    $scope.user = UserService.getSelectedUser();
-    console.log($scope.user);
-
-    if (!$scope.user) {
-      console.error("No user selected!");
-      return;
+    // بررسی وجود داده در UserService در صورت نبود از api
+    const selectedUser = UserService.getSelectedUser();
+    if (selectedUser && selectedUser.id === $routeParams.id) {
+      $scope.user = selectedUser;
+      $scope.isLoading = false;
+      console.log("User loaded from UserService:", $scope.user);
+    } else if ($routeParams.id) {
+      $http({
+        method: "GET",
+        url: "/api/manage/users/" + $routeParams.id,
+        headers: {
+          Authorization: "Bearer " + $cookies.get("token"),
+        },
+      })
+        .then(function (response) {
+          $scope.user = response.data.user;
+          console.log("User loaded from API:", $scope.user);
+          UserService.setSelectedUser($scope.user);
+        })
+        .catch(function (error) {
+          console.error("Error loading user from API:", error);
+          if (error.status === 401) {
+            $cookies.remove("token");
+            $location.path("/login");
+          }
+        })
+        .finally(function () {
+          $scope.isLoading = false;
+        });
+    } else {
+      console.error("No user ID provided in route parameters!");
+      $scope.isLoading = false;
     }
 
     console.log("Editing user:", $scope.user);
@@ -57,12 +82,19 @@ app.controller(
           }
         })
         .catch(function (error) {
-          console.error("Error updating user:", error);
-          if (error.status === 401) {
-            $cookies.remove("token");
-            $location.path("/login");
+          console.error("Error creating user:", error);
+          // بررسی وجود خطاها در context
+          if (error.data && error.data.context) {
+            const contextErrors = error.data.context;
+            for (const field in contextErrors) {
+              if (contextErrors[field]) {
+                showToast(contextErrors[field]);
+                return;
+              }
+            }
           }
         })
+
         .finally(function () {
           $scope.isLoading = false; // پایان لودینگ
         });
@@ -72,5 +104,16 @@ app.controller(
       console.log("Navigating back to dashboard.");
       $location.path("/dashboard");
     };
+
+    function showToast(message) {
+      var toastElement = document.getElementById("errorToast");
+      document.getElementById("toastMessage").innerText = message;
+      var toast = new bootstrap.Toast(toastElement, {
+        animation: true,
+        autohide: true,
+        delay: 3000,
+      });
+      toast.show();
+    }
   }
 );
