@@ -34,13 +34,11 @@ app.controller(
       })
         .then(function (response) {
           $scope.isLoading = true;
-          console.log("API Response:", response.data);
           if (response.data.success) {
             $scope.userData = response.data.user;
             response.data.user.avatar =
               "https://www.shopgram123.ir" + response.data.user.avatar;
             $scope.userData = response.data.user;
-            console.log("User Data:", response.data.user);
           }
         })
         .catch(function (error) {
@@ -59,7 +57,6 @@ app.controller(
     $scope.users = [];
 
     function loadUsers() {
-      console.log("loadUsers function called");
       $http({
         method: "GET",
         url: "/api/manage/users",
@@ -68,14 +65,12 @@ app.controller(
         },
       })
         .then(function (response) {
-          console.log("API response:", response);
           if (response.data.success) {
             $scope.users = response.data.users;
             $scope.showUsers = true;
           }
         })
         .catch(function (error) {
-          console.error("Error loading users:", error);
           if (error.status === 401) {
             $cookies.remove("token");
             $location.path("/login");
@@ -88,13 +83,12 @@ app.controller(
 
     $scope.deleteUserWithConfirmation = function (user) {
       if (!user || !user.id) {
-        console.error("User or user ID is not defined.");
         return;
       }
 
       $scope.userToDelete = user; // ذخیره کاربر برای تأیید حذف
       const deleteModal = new bootstrap.Modal(
-        document.getElementById("deleteUserModal")
+        document.getElementById("deleteUserModal"),
       );
       deleteModal.show();
     };
@@ -115,10 +109,9 @@ app.controller(
         },
       })
         .then(function (response) {
-          console.log("User deleted successfully:", response);
           if (response.data.success) {
             $scope.users = $scope.users.filter(
-              (user) => user.id !== $scope.userToDelete.id
+              (user) => user.id !== $scope.userToDelete.id,
             );
             $scope.userToDelete = null; // پاک‌سازی داده کاربر
           }
@@ -165,7 +158,6 @@ app.controller(
     };
 
     $scope.confirmLogout = function () {
-      console.log("Logging out...");
       $cookies.remove("token");
       logoutModal.hide();
       setTimeout(function () {
@@ -173,8 +165,5 @@ app.controller(
         $scope.$apply();
       }, 200);
     };
-    $scope.confirmLogoutaaa = function () {
-      console.log("sadasd");
-    };
-  }
+  },
 );

@@ -16,9 +16,8 @@ app.controller(
           { label: "ویرایش کاربر", url: "/createuser" },
         ];
       }
-    }); 
+    });
     $scope.goBack = function () {
-      console.log("Navigating back to dashboard.");
       $location.path("/dashboard");
     };
 
@@ -60,7 +59,6 @@ app.controller(
       $scope.createUser(requestData);
     };
 
-
     //  ایجاد کاربر
     $scope.createUser = function (requestData) {
       $scope.isLoading = true;
@@ -75,8 +73,6 @@ app.controller(
         data: requestData,
       })
         .then(function (response) {
-          console.log("User created successfully:", response);
-
           if (response.status === 200) {
             $scope.newUser = {};
             showToast(response.data.description);
@@ -110,5 +106,5 @@ app.controller(
       });
       toast.show();
     }
-  }
+  },
 );

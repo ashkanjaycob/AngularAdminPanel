@@ -35,7 +35,6 @@ app.controller(
         toast.show();
         return;
       }
-      // If validations pass, proceed with login
       $scope.login();
     };
 
@@ -53,7 +52,6 @@ app.controller(
       }).then(
         function successCallback(response) {
           $cookies.put("token", response.data.token);
-          console.log("Login successful:", response.data);
           $location.path("/dashboard");
         },
         function errorCallback(error) {
@@ -67,8 +65,8 @@ app.controller(
           });
           toast.show();
           console.error("Login failed:", error.data);
-        }
+        },
       );
     };
-  }
+  },
 );

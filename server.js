@@ -13,9 +13,9 @@ app.use(
   proxy("www.shopgram123.ir", {
     https: true,
     proxyReqPathResolver: function (req) {
-      console.log("Original URL:", req.url); 
+      console.log("Original URL:", req.url);
       const newPath = "/site/api/v1" + req.url.replace("/api", "");
-      console.log("New Path:", newPath); 
+      console.log("New Path:", newPath);
       return newPath;
     },
     proxyReqOptDecorator: function (proxyReqOpts) {

@@ -1,51 +1,53 @@
 <div class="d-flex" ng-controller="DashboardController">
-  
-    
   <div class="container" ng-if="isLoading">
     <div class="d-flex justify-content-center align-items-center vh-100 my-4">
-    <div class="spinner-border text-primary m-4" role="status">
+      <div class="spinner-border text-primary m-4" role="status"></div>
+      <h4 class="text-primary">در حال بارگذاری . . .</h4>
     </div>
-    <h4 class="text-primary">در حال بارگذاری  . . . </h4>
-  </div>
   </div>
 
   <div class="container bg-transparent" ng-if="!isLoading">
     <div class="flex-grow-1">
-    <div class="min-vh-100">
-      <div class="row">
-        <div class="row justify-content-between align-items-center my-4 p-0">
-          <span class="col-12 col-md-6">
-            <h5>
-              {{welcomeMessage}} , {{userData.name}}
-            </h5>
-            <p>شما با موفقیت وارد شدید.</p>
-          </span>
-          <span class="col-12 col-md-6 text-end">
-
-            <!-- <button class="btn btn-success w-25" ng-click="loadUsers()">
+      <div class="min-vh-100">
+        <div class="row">
+          <div class="row justify-content-between align-items-center my-4 p-0">
+            <span class="col-12 col-md-6">
+              <h5>{{welcomeMessage}} , {{userData.name}}</h5>
+              <p>شما با موفقیت وارد شدید.</p>
+            </span>
+            <span class="col-12 col-md-6 text-end">
+              <!-- <button class="btn btn-success w-25" ng-click="loadUsers()">
               <i class="bi bi-people ms-2"></i>
               کاربران
             </button> -->
 
-            <button href="#" class="btn btn-danger" ng-click="logout()">
-              <i class="bi bi-box-arrow-right ms-2"></i>
-              خروج
-            </button>
-          </span>
-        </div>
-          <hr class="cutomHr">
+              <button href="#" class="btn btn-danger" ng-click="logout()">
+                <i class="bi bi-box-arrow-right ms-2"></i>
+                خروج
+              </button>
+            </span>
+          </div>
+          <hr class="cutomHr" />
 
           <div class="col-12" ng-if="showUsers">
-
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <nav
+              style="--bs-breadcrumb-divider: &quot;>&quot;"
+              aria-label="breadcrumb"
+            >
               <ol class="breadcrumb">
-                <li class="breadcrumb-item" ng-repeat="breadcrumb in breadcrumbs" ng-class="{'active': $last}" aria-current="{{$last ? 'page' : undefined}}">
-                  <a ng-if="!$last" href="{{breadcrumb.url}}">{{breadcrumb.label}}</a>
+                <li
+                  class="breadcrumb-item"
+                  ng-repeat="breadcrumb in breadcrumbs"
+                  ng-class="{'active': $last}"
+                  aria-current="{{$last ? 'page' : undefined}}"
+                >
+                  <a ng-if="!$last" href="{{breadcrumb.url}}"
+                    >{{breadcrumb.label}}</a
+                  >
                   <span ng-if="$last">{{breadcrumb.label}}</span>
                 </li>
               </ol>
             </nav>
-            
 
             <!-- Users list -->
 
@@ -59,13 +61,11 @@
                 </div>
               </div>
 
-              <hr class="cutomHr"/>
+              <hr class="cutomHr" />
               <div class="card border-0 shadow-sm">
                 <div class="card-body text-start p-0">
                   <div class="table-responsive">
-                    <table
-                      class="table table-responsive table-hover mb-0 p-8"
-                    >
+                    <table class="table table-responsive table-hover mb-0 p-8">
                       <thead class="table-light">
                         <tr>
                           <th class="border-0 p-3">نام و نام خانوادگی</th>
@@ -93,9 +93,12 @@
                               </button>
                               <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                  <button class="dropdown-item cursor-pointer" ng-click="goToEditUser(user)" 
-                                    ><i class="bi bi-pencil me-2"></i>ویرایش</button
+                                  <button
+                                    class="dropdown-item cursor-pointer"
+                                    ng-click="goToEditUser(user)"
                                   >
+                                    <i class="bi bi-pencil me-2"></i>ویرایش
+                                  </button>
                                 </li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li>
@@ -117,80 +120,92 @@
                 </div>
               </div>
             </div>
-            </div>
-
+          </div>
         </div>
-    </div>
+      </div>
     </div>
   </div>
 
-  
   <div
-  class="modal fade"
-  id="logoutModal"
-  tabindex="-1"
-  aria-labelledby="logoutModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="logoutModalLabel">تایید خروج</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          انصراف
-        </button>
-        <button 
-        type="button" 
-        class="btn btn-danger" 
-        ng-click="confirmLogout()">
-        خروج
-      </button>
+    class="modal fade"
+    id="logoutModal"
+    tabindex="-1"
+    aria-labelledby="logoutModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="logoutModalLabel">تایید خروج</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            انصراف
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            ng-click="confirmLogout()"
+          >
+            خروج
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-
-    <div
-class="modal fade"
-id="deleteUserModal"
-tabindex="-1"
-aria-labelledby="deleteUserModalLabel"
-aria-hidden="true"
->
-<div class="modal-dialog modal-dialog-centered">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="deleteUserModalLabel">تأیید حذف</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      آیا مطمئن هستید که می‌خواهید کاربر {{userToDelete.name}} را حذف کنید؟
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
-      <button type="button" class="btn btn-danger" ng-click="confirmDeleteUser()" data-bs-dismiss="modal">
-        حذف
-      </button>
+  <div
+    class="modal fade"
+    id="deleteUserModal"
+    tabindex="-1"
+    aria-labelledby="deleteUserModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteUserModalLabel">تأیید حذف</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          آیا مطمئن هستید که می‌خواهید کاربر {{userToDelete.name}} را حذف کنید؟
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            انصراف
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            ng-click="confirmDeleteUser()"
+            data-bs-dismiss="modal"
+          >
+            حذف
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-    </div>
-
-</div>
 </div>

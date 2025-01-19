@@ -25,7 +25,6 @@ app.controller(
     if (selectedUser && selectedUser.id === $routeParams.id) {
       $scope.user = selectedUser;
       $scope.isLoading = false;
-      console.log("User loaded from UserService:", $scope.user);
     } else if ($routeParams.id) {
       $http({
         method: "GET",
@@ -36,7 +35,6 @@ app.controller(
       })
         .then(function (response) {
           $scope.user = response.data.user;
-          console.log("User loaded from API:", $scope.user);
           UserService.setSelectedUser($scope.user);
         })
         .catch(function (error) {
@@ -54,16 +52,12 @@ app.controller(
       $scope.isLoading = false;
     }
 
-    console.log("Editing user:", $scope.user);
-
     $scope.updateUser = function () {
       $scope.isLoading = true;
       if (!$scope.user || !$scope.user.id) {
         console.error("User or user ID is not defined.");
         return;
       }
-
-      console.log("Updated user:", $scope.user);
 
       $http({
         method: "PUT",
@@ -76,7 +70,6 @@ app.controller(
         data: $scope.user,
       })
         .then(function (response) {
-          console.log("API response:", response);
           if (response.data.success) {
             $location.path("/dashboard");
           }
@@ -101,7 +94,6 @@ app.controller(
     };
 
     $scope.goBack = function () {
-      console.log("Navigating back to dashboard.");
       $location.path("/dashboard");
     };
 
@@ -115,5 +107,5 @@ app.controller(
       });
       toast.show();
     }
-  }
+  },
 );
