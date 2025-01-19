@@ -110,5 +110,5 @@ app.controller(
       });
       toast.show();
     }
-  }
+  },
 );

@@ -7,7 +7,7 @@ app.controller(
     $location,
     $http,
     $cookies,
-    $timeout
+    $timeout,
   ) {
     $scope.breadcrumbs = [
       { label: "مدیریت", url: "/dashboard" },
@@ -117,5 +117,5 @@ app.controller(
       });
       toast.show();
     }
-  }
+  },
 );
