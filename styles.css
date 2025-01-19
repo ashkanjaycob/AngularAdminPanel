@@ -1,4 +1,18 @@
 body {
   font-family: Vazirmatn, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-feature-settings: "lnum" !important;
+}
+
+.cutomHr {
+  border: 0.3px solid rgba(128, 128, 128, 0.39);
+}
+.box {
+  margin-top: 60px;
+}
+
+@media screen and (max-width: 746px) {
+  .box {
+    margin-top: 0;
+  }
 }

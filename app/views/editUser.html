@@ -41,7 +41,7 @@
         </ol>
       </nav>
 
-      <h1 class="py-4">{{welcomeMessage}}</h1>
+      <h2 class="py-4">{{welcomeMessage}}</h2>
 
       <form ng-submit="updateUser()">
         <div class="row justify-content-start align-items-start">
@@ -110,7 +110,8 @@
           </div>
         </div>
 
-        <hr class="my-4" />
+        <hr class="my-4 cutomHr" />
+
         <div>
           <button
             ng-if="!isLoading"

@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="container p-4 min-vh-100">
+  <div class="container p-4 min-vh-100 box">
     <div class="col-12">
       <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -34,7 +34,7 @@
         </ol>
       </nav>
 
-      <h1 class="py-4">{{welcomeMessage}}</h1>
+      <h2 class="py-4">{{welcomeMessage}}</h2>
 
       <form ng-submit="updateUser()">
         <div class="row justify-content-start align-items-start">
@@ -98,14 +98,14 @@
                   class="form-control p-3"
                   id="username"
                   ng-model="newUser.username"
-                  placeholder="ساخت تصادفی با خالی ماندن"
+                  placeholder="ساخت تصادفی نام کاربری با خالی ماندن"
                 />
               </label>
             </div>
           </div>
         </div>
 
-        <hr class="my-4" />
+        <hr class="my-4 cutomHr" />
         <div>
           <button ng-if="isLoading" class="btn btn-secondary">
             صبر کنید . . .
