@@ -66,7 +66,6 @@ app.controller(
         method: "POST",
         url: "/api/manage/users",
         headers: {
-          Authorization: "Bearer " + $cookies.get("token"),
           Accept: "application/json",
           "Content-Type": "application/json",
         },

@@ -37,9 +37,6 @@ app.controller(
       $http({
         method: "GET",
         url: "/api/manage/users/" + $routeParams.id,
-        headers: {
-          Authorization: "Bearer " + $cookies.get("token"),
-        },
       })
         .then(function (response) {
           $scope.user = response.data.user;
