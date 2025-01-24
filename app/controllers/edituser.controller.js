@@ -9,23 +9,6 @@ app.controller(
     $cookies,
     $timeout,
   ) {
-    $scope.breadcrumbs = [
-      { label: "مدیریت", url: "/dashboard" },
-      { label: "کاربران", url: "/users" },
-    ];
-
-    $scope.$on("$routeChangeSuccess", function (event, currentRoute) {
-      const path = currentRoute.originalPath;
-      if (path === "/edituser/:id") {
-        $scope.breadcrumbs = [
-          { label: "مدیریت", url: "/dashboard" },
-          { label: "کاربران", url: "/dashboard" },
-          { label: "ویرایش کاربر", url: "/edituser" },
-        ];
-      }
-    });
-
-    $scope.welcomeMessage = "ویرایش کاربر";
     $scope.isLoading = true;
 
     // بررسی وجود داده در UserService در صورت نبود از api

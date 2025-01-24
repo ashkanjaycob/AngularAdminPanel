@@ -1,23 +1,6 @@
 app.controller(
   "DashboardController",
   function ($scope, $http, $location, $cookies, UserService) {
-    $scope.welcomeMessage = "به پنل مدیریت خوش آمدید";
-
-    $scope.breadcrumbs = [
-      { label: "مدیریت", url: "/dashboard" },
-      { label: "کاربران", url: "/users" },
-    ];
-
-    $scope.$on("$routeChangeSuccess", function (event, currentRoute) {
-      const path = currentRoute.originalPath;
-      if (path === "/users") {
-        $scope.breadcrumbs = [
-          { label: "مدیریت", url: "/dashboard" },
-          { label: "کاربران", url: "/users" },
-        ];
-      }
-    });
-
     var logoutModal;
 
     // Fetch user data
