@@ -62,7 +62,7 @@ app.controller(
             showToast("کاربر با موفقیت ویرایش شد .");
             $timeout(function () {
               $location.path("/dashboard");
-            }, 3500);
+            }, 2900);
           }
         })
         .catch(function (error) {

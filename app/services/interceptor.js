@@ -1,4 +1,3 @@
-// Define the AuthInterceptor factory
 app.factory("AuthInterceptor", [
   "$q",
   "$location",
@@ -9,8 +8,12 @@ app.factory("AuthInterceptor", [
         const token = $cookies.get("token");
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
+        } else if (
+          config.url.includes("views") &&
+          config.url !== "app/views/login.html"
+        ) {
+          $location.path("/login");
         }
-        console.log(config);
         return config;
       },
       responseError: function (response) {
