@@ -1,0 +1,13 @@
+# Node.js modules
+node_modules/
+
+.env
+
+*.log
+
+# فایل‌های build
+build/
+dist/
+
+.DS_Store
+Thumbs.db
