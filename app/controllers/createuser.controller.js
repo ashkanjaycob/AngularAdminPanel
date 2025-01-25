@@ -1,6 +1,6 @@
 app.controller(
   "CreateUser",
-  function ($scope, $location, $http, $cookies, $timeout) {
+  function ($scope, $location, $http, $timeout) {
     $scope.goBack = function () {
       $location.path("/dashboard");
     };

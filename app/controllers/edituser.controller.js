@@ -1,29 +1,15 @@
 app.controller(
   "EditUserController",
-  function (
-    $scope,
-    $routeParams,
-    UserService,
-    $location,
-    $http,
-    $cookies,
-    $timeout,
-  ) {
+  function ($scope, $routeParams, $location, $http, $cookies, $timeout) {
     $scope.isLoading = true;
 
-    // بررسی وجود داده در UserService در صورت نبود از api
-    const selectedUser = UserService.getSelectedUser();
-    if (selectedUser && selectedUser.id === $routeParams.id) {
-      $scope.user = selectedUser;
-      $scope.isLoading = false;
-    } else if ($routeParams.id) {
+    if ($routeParams.id) {
       $http({
         method: "GET",
         url: "/api/manage/users/" + $routeParams.id,
       })
         .then(function (response) {
           $scope.user = response.data.user;
-          UserService.setSelectedUser($scope.user);
         })
         .catch(function (error) {
           console.error("Error loading user from API:", error);
@@ -97,5 +83,5 @@ app.controller(
       });
       toast.show();
     }
-  },
+  }
 );

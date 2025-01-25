@@ -65,11 +65,9 @@ app.controller(
     }
 
     $scope.deleteUserWithConfirmation = function (user) {
-      if (!user || !user.id) {
-        return;
-      }
-
-      $scope.userToDelete = user; // ذخیره کاربر برای تأیید حذف
+      if (!user) return;
+      
+      $scope.userToDelete = user;
       const deleteModal = new bootstrap.Modal(
         document.getElementById("deleteUserModal"),
       );
@@ -77,7 +75,7 @@ app.controller(
     };
 
     $scope.confirmDeleteUser = function () {
-      if (!$scope.userToDelete || !$scope.userToDelete.id) {
+      if (!$scope.userToDelete) {
         console.error("No user selected for deletion.");
         return;
       }
@@ -96,7 +94,7 @@ app.controller(
             $scope.users = $scope.users.filter(
               (user) => user.id !== $scope.userToDelete.id,
             );
-            $scope.userToDelete = null; // پاک‌سازی داده کاربر
+            $scope.userToDelete = null;
           }
         })
         .catch(function (error) {
