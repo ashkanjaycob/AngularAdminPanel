@@ -83,5 +83,5 @@ app.controller(
       });
       toast.show();
     }
-  }
+  },
 );

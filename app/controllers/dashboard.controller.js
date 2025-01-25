@@ -66,7 +66,7 @@ app.controller(
 
     $scope.deleteUserWithConfirmation = function (user) {
       if (!user) return;
-      
+
       $scope.userToDelete = user;
       const deleteModal = new bootstrap.Modal(
         document.getElementById("deleteUserModal"),
